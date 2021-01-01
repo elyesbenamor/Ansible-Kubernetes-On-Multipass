@@ -1,0 +1,24 @@
+---
+- name: Master and slave requirements
+  hosts: masters, slave
+  vars_files: 
+    - roles/docker/vars/default.yml
+  pre_tasks:
+    - name: Is alive
+      ping:
+  roles:
+    - { role: user-system, tags: ["ubuntu"]}
+    - { role: upgrades, tags: ["os_upgrade"]}
+    - { role: dependencies, tags: ["python", "transport_layer"] }
+    - { role: docker, become: true, become_methods: sudo  ,tags: ["docker"]}
+    - { role: kubernetes, become: true, become_methods: sudo, tags: ["latest"]}
+
+- name: install kubelet on master
+  hosts: masters
+  become: yes
+  tasks:
+   - name: install kubectl
+     apt:
+       name: kubectl
+       state: present
+       force: yes

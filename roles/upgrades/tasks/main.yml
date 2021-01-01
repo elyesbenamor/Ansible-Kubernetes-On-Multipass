@@ -1,0 +1,21 @@
+---
+  - name: updating OS
+    block:
+      - name: update apt cache
+        become: true
+        become_method: sudo 
+        apt:
+          update_cache: yes
+
+
+  - name: upgrade OS
+    block:
+      - name: Upgrade the OS (apt-get dist-upgrade)
+        become: true
+        #become_user: root
+        become_method: sudo
+        apt:
+          upgrade: dist
+
+
+

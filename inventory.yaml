@@ -1,0 +1,23 @@
+---
+  masters:
+    hosts:
+      master:
+        ansible_host: 10.116.141.103
+        ansible_connection: ssh
+        ansible_user: ubuntu
+    vars: 
+      ansible_python_interpreter: /usr/bin/python3
+
+  slave:
+    hosts:
+      worker1:
+        ansible_host: 10.116.141.154
+        ansible_connection: ssh
+        ansible_user: ubuntu
+      worker2:
+        ansible_host: 10.116.141.127
+        ansible_connection: ssh
+        ansible_user: ubuntu
+    vars: 
+      ansible_python_interpreter: /usr/bin/python3
+
