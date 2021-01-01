@@ -2,22 +2,22 @@
   masters:
     hosts:
       master:
-        ansible_host: 10.116.141.103
-        ansible_connection: ssh
-        ansible_user: ubuntu
+        ansible_host: "{{ansible_host}}"
+        ansible_connection: "{{ansible_connection}}"
+        ansible_user: "{{ansible_user}}"
     vars: 
-      ansible_python_interpreter: /usr/bin/python3
+      ansible_python_interpreter: "{{ansible_python_interpreter}}"
 
   slave:
     hosts:
       worker1:
-        ansible_host: 10.116.141.154
-        ansible_connection: ssh
-        ansible_user: ubuntu
+        ansible_host: "{{ansible_host}}"
+        ansible_connection: "{{ansible_connection}}"
+        ansible_user: "{{ansible_user}}"
       worker2:
-        ansible_host: 10.116.141.127
-        ansible_connection: ssh
-        ansible_user: ubuntu
+        ansible_host: "{{ansible_host}}"
+        ansible_connection: "{{ansible_connection}}"
+        ansible_user: "{{ansible_user}}"
     vars: 
-      ansible_python_interpreter: /usr/bin/python3
+      ansible_python_interpreter: "{{ansible_python_interpreter}}"
 
