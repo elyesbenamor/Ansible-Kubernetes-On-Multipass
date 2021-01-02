@@ -6,7 +6,7 @@ An Ansible Role that installs [Kubernetes](https://kubernetes.io) on Linux.
 
 ## Requirements
 
-Requires Docker; recommended role for Docker installation: `geerlingguy.docker`.
+Requires Docker; recommended role for Docker installation: `elyesbenamor.docker`.
 
 ## Role Variables
 
@@ -110,8 +110,8 @@ None.
     kubernetes_allow_pods_on_master: true
 
   roles:
-    - geerlingguy.docker
-    - geerlingguy.kubernetes
+    - elyesbenamor.docker
+    - elyesbenamor.kubernetes
 ```
 
 ### Two or more nodes (single master) cluster
@@ -137,8 +137,8 @@ Playbook:
     kubernetes_allow_pods_on_master: true
 
   roles:
-    - geerlingguy.docker
-    - geerlingguy.kubernetes
+    - elyesbenamor.docker
+    - elyesbenamor.kubernetes
 ```
 
 Then, log into the Kubernetes master, and run `kubectl get nodes` as root, and you should see a list of all the servers.
@@ -147,6 +147,3 @@ Then, log into the Kubernetes master, and run `kubectl get nodes` as root, and y
 
 MIT / BSD
 
-## Author Information
-
-This role was created in 2018 by [Jeff Geerling](https://www.jeffgeerling.com/), author of [Ansible for DevOps](https://www.ansiblefordevops.com/).
