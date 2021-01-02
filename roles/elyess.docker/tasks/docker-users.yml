@@ -1,0 +1,12 @@
+---
+- name: Create "docker" group
+  group:
+    name: "{{ docker_group }}"
+    state: present
+
+# sudo usermod -aG docker root
+- name: Add remote "ubuntu" user to "docker" group
+  user:
+    name: "{{ remote_user }}"
+    group: "{{ docker_group }}"
+    append: yes
