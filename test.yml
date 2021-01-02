@@ -1,0 +1,85 @@
+---
+- name: Master and slave requirements
+  hosts: masters, slave
+  vars_files: 
+    - roles/docker/vars/default.yml
+    - group_vars/masters.yml
+    - group_vars/slave.yml
+    - roles/user-system/vars/default.yml
+  pre_tasks:
+    - name: Is alive
+      ping:
+    
+  roles:
+    - { role: upgrades, tags: ["os_upgrade"]}
+    - { role: user-system, tags: ["ubuntu"]}
+    
+    - { role: dependencies, tags: ["python", "transport_layer"] }
+    - { role: docker, become: true, become_methods: sudo  ,tags: ["docker"]}
+    - { role: kubernetes, become: true, become_methods: sudo, tags: ["latest"]}
+
+
+#- name: install kubelet on master
+ # hosts: masters
+ # vars_files:
+ #   - group_vars/masters.yml
+ # become: yes
+ # tasks:
+ #  - name: install kubectl
+     #apt:
+  #     name: kubectl
+      # state: present
+      # force: yes
+- name: config cluster
+  hosts: masters, slave
+  vars_files:
+    - group_vars/masters.yml
+    - group_vars/slave.yml
+  tasks:
+    - name: Make the Swap inactive
+      command: swapoff -a
+
+    - name: Remove Swap entry from /etc/fstab.
+      lineinfile:
+        dest: /etc/fstab
+        regexp: swap
+        state: absent
+
+
+
+
+- name: Initiate kubernetes master
+  hosts: masters
+  vars_files:
+    - group_vars/masters.yml
+    - roles/master/vars/default.yml
+  become: yes
+  become_method: sudo
+  become_user: root
+  gather_facts: yes
+  connection: ssh
+  roles:
+    - { role: master, tags: ["flannel"]}
+- name: initiate cluster
+  hosts: slave
+  vars_files:
+    - group_vars/slave.yml
+  roles:
+    - { role: workers, tags: ["tag"]}
+
+- name: Configure kubectl command auto-completion.
+  hosts: masters
+  vars_files:
+    - group_vars/masters.yml
+  become: yes
+  become_method: sudo
+  become_user: root
+  gather_facts: yes
+  connection: ssh
+  tasks: 
+  - name: --
+    lineinfile:
+      dest: /home/{{ ansible_user }}/.bashrc
+      line: 'source <(kubectl completion bash)'
+      insertafter: EOF
+    
