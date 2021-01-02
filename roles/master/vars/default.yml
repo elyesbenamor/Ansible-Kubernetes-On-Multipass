@@ -1,4 +1,0 @@
-ansible_user: ubuntu
-pod_network_cidr: 10.244.0.0/16
-k8s_master_ip: 10.116.141.130
-pod_network_manifest_file: https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
