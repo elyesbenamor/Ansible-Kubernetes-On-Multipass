@@ -1,1 +1,6 @@
 /cloud-init.yaml
+/roles/docker/*
+/roles/kubernetes/*
+/roles/master/*
+/geer.yml
+/test.yml
