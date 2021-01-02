@@ -35,7 +35,7 @@ Playbook:
 
 
   roles:
-    - elyesbenamor.rkt
+    - elyesbenamor.ansible_role_rkt
 ```
 
 Then, log into the master, and run `rkt version` as ubuntu non root user, and you should see the version of your runtime rkt.
