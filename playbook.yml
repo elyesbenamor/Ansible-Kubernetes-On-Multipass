@@ -1,24 +1,21 @@
 ---
 - name: Master and slave requirements
   hosts: masters, slave
+  vars:
+    kubernetes_allow_pods_on_master: true
   vars_files: 
     - roles/docker/vars/default.yml
+    - group_vars/masters.yml
+    - roles/user-system/vars/default.yml
+    - roles/ledongthuc.rkt-install/vars/default.yml
   pre_tasks:
     - name: Is alive
       ping:
+    
   roles:
-    - { role: user-system, tags: ["ubuntu"]}
     - { role: upgrades, tags: ["os_upgrade"]}
+    - { role: user-system, tags: ["ubuntu"]}
+    
     - { role: dependencies, tags: ["python", "transport_layer"] }
-    - { role: docker, become: true, become_methods: sudo  ,tags: ["docker"]}
-    - { role: kubernetes, become: true, become_methods: sudo, tags: ["latest"]}
-
-- name: install kubelet on master
-  hosts: masters
-  become: yes
-  tasks:
-   - name: install kubectl
-     apt:
-       name: kubectl
-       state: present
-       force: yes
+    - { role: geerlingguy.docker,become: true, become_methods: sudo, tags: ["geer-docker"]}
+    - { role: geerlingguy.kubernetes, become: true, become_methods: sudo, tags: [geer-kuber]}

@@ -12,7 +12,7 @@
     block:
       - name: Upgrade the OS (apt-get dist-upgrade)
         become: true
-        #become_user: root
+        become_user: root
         become_method: sudo
         apt:
           upgrade: dist
