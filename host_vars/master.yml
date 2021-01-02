@@ -1,1 +1,2 @@
-ansible_host: 10.116.141.130
+ansible_host: 10.116.141.79
+kubernetes_role: "master"
