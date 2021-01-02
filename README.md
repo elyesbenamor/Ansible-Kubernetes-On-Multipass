@@ -1,4 +1,4 @@
-# Ansible : INstall kubernetes cluster on multipass VM's
+# Ansible : Install kubernetes cluster on multipass VM's
 
 [![CI](https://github.com/geerlingguy/ansible-role-kubernetes/workflows/CI/badge.svg?event=push)](https://github.com/geerlingguy/ansible-role-kubernetes/actions?query=workflow%3ACI)
 
