@@ -1,0 +1,14 @@
+---
+- name: Download Rkt
+  get_url: >
+   url=https://github.com/coreos/rkt/releases/download/v{{ rkt_version }}/rkt-v{{ rkt_version }}.tar.gz
+   dest=/tmp/rkt.zip
+
+- name: Extract Rkt
+  unarchive: >
+   src=/tmp/rkt.zip
+   dest=/opt/
+   copy=no
+   owner={{ ansible_ssh_user }}
+  become: yes
+ 
