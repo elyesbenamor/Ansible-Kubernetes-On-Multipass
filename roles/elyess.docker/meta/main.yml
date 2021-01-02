@@ -3,9 +3,8 @@ dependencies: []
 
 galaxy_info:
   role_name: docker
-  author: geerlingguy
+  author: elyesbenamor
   description: Docker for Linux.
-  company: "Midwestern Mac, LLC"
   license: "license (BSD, MIT)"
   min_ansible_version: 2.4
   platforms:
@@ -13,9 +12,6 @@ galaxy_info:
       versions:
         - 7
         - 8
-    - name: Fedora
-      versions:
-        - all
     - name: Debian
       versions:
         - stretch

@@ -1,6 +1,6 @@
 dependencies: []
 galaxy_info:
-  author: Thuc Le
+  author: elyesbenamor
   description: Install Rkt container engine
   company: 
   issue_tracker_url: https://github.com/ledongthuc/ansible.rkt/issues
@@ -9,9 +9,6 @@ galaxy_info:
   github_branch: master
   platforms:
   - name: Fedora
-    versions:
-    - all
-  - name: MacOSX
     versions:
     - all
   - name: Ubuntu
