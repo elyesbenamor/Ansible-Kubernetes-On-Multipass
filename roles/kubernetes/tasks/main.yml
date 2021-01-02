@@ -8,15 +8,15 @@
     repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
     state: present
     filename: 'kubernetes'
+    mode: 0600
 
-- name: install kubelet
-  apt:
-    name: kubelet
+- name: Installing Kubernetes Cluster Packages.
+  apt: 
+    name:
+      - kubeadm=1.18.0-00
+      - kubectl=1.18.0-00
+      - kubelet=1.18.0-00
     state: present
     update_cache: true
 
-- name: install kubeadm
-  apt:
-    name: kubeadm
-    state: present
 

@@ -1,6 +1,8 @@
 - name: create the 'ubuntu' user
+  become: yes
+  become_method: sudo
   user: 
-    name: ubuntu 
+    name: "{{new_user}}" 
     append: yes 
     state: present 
     createhome: yes 
@@ -10,13 +12,23 @@
   become: true
   become_method: sudo 
   lineinfile:
-    dest: /etc/sudoers
-    line: 'ubuntu ALL=(ALL) NOPASSWD: ALL'
+    dest: "/etc/sudoers"
+    line: '{{new_user}} ALL=(ALL) NOPASSWD: ALL'
     validate: 'visudo -cf %s'
 
 - name: set up authorized keys for the ubuntu user
   authorized_key: 
-    user: ubuntu 
-    key: "{{item}}"
-  with_file:
-    - ~/.ssh/id_rsa.pub
+    user: "{{new_user}}"
+    key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
+    #key: "{{item}}"
+  #with_file:
+    #- ~/.ssh/id_rsa.pub
+- name: Print the created user.
+  shell: id "{{ new_user }}"
+  register: new_user_created
+
+- name: debug
+  debug:
+    msg: "{{ new_user_created.stdout_lines[0] }}"
+
+
